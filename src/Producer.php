@@ -77,12 +77,7 @@ class Producer extends Command
 
         $i = 0;
         while (true) {
-            if (is_null($kafka_partition)) {
-                $producer->init($produceData)->produce(new ProducerData("Message $i", $kafka_partition, 0, $i), 100);
-            } else {
-                $producer->init($produceData)->produce(new ProducerData("Message $i", $kafka_partition, 0, $i), 100);
-            }
-
+            $producer->init($produceData)->produce(new ProducerData("Message $i", RD_KAFKA_PARTITION_UA, 0, $i), 100);
             $producer->flush();
             usleep($duration);
             $i++;
